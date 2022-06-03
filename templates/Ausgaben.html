@@ -1,0 +1,81 @@
+{% extends "head.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ausgaben</title>
+</head>
+<body>
+<h1>Lass uns ansehen, wieviel du pro Monat ausgibst</h1>
+    </br>
+
+<form method="POST">
+
+    <h4>Kategorie</h4>
+    <select name="Kategorie">
+        <option value="Ausbildung">Ausbildung</option>
+        <option value="Shopping">Shopping</option>
+        <option value="Ausgehen">Ausgehen</option>
+        <option value="Mobilität">Mobilität</option>
+        <option value="Wohnen">Wohnen</option>
+        <option value="Kleinkram">KLeinkram</option>
+        <option value="Unkategorisiert">Unkategorisiert</option>
+    </select>
+    </br>
+    </br>
+        <h4>Monat</h4>
+    <select name="Monat">
+        <option value="01">Januar</option>
+        <option value="02">Februar</option>
+        <option value="03">März</option>
+        <option value="04">April</option>
+        <option value="05">Mai</option>
+        <option value="06">Juni</option>
+        <option value="07">Juli</option>
+        <option value="08">August</option>
+        <option value="09">September</option>
+        <option value="10">Oktober</option>
+        <option value="11">November</option>
+        <option value="12">Dezember</option>
+
+    </select>
+
+    <button type="submit">Senden</button>
+
+
+</form>
+
+
+</br>
+</br>
+<h3>{{aussagesatz}}</h3>
+{% for elemente in liste_elemente %}
+
+<div class>
+
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <th style="width: 30%" scope="col">Datum</th>
+            <th style="width: 70%" scope="col">Ausgaben</th>
+        </thead>
+
+            <td style="color: black;">{{elemente["Datum"]}}</td>
+            {% if elemente["Ausgaben"]|int > 0 %}
+            <td style="color: red;">{{elemente["Ausgaben"]}}</td>
+            {% endif %}
+            {% if elemente["Ausgaben"]|int < 0 %}
+            <td style="color: green;">{{elemente["Ausgaben"]}}</td>
+            {% endif %}
+
+
+    </table>
+     {% endfor %}
+</div>
+
+</body>
+{% endblock %}
+</html>
+

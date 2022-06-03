@@ -1,0 +1,52 @@
+[
+   {
+      "Ausgaben": 300,
+      "Kategorie": "Ausbildung",
+      "Datum": "2022-06-14"
+   },
+   {
+      "Ausgaben": 2000,
+      "Kategorie": "Ausbildung",
+      "Datum": "2022-06-03"
+   },
+   {
+      "Ausgaben": 3000,
+      "Kategorie": "Mobilit\u00e4t",
+      "Datum": "2022-06-03"
+   },
+   {
+      "Ausgaben": -200,
+      "Kategorie": "Ausgehen",
+      "Datum": "2022-06-03"
+   },
+   {
+      "Ausgaben": 200,
+      "Kategorie": "Ausbildung",
+      "Datum": "2022-06-16"
+   },
+   {
+      "Ausgaben": -2000,
+      "Kategorie": "Ausbildung",
+      "Datum": "2022-06-17"
+   },
+   {
+      "Ausgaben": 6000,
+      "Kategorie": "Ausbildung",
+      "Datum": "2022-06-10"
+   },
+   {
+      "Ausgaben": 1000,
+      "Kategorie": "Ausbildung",
+      "Datum": "2022-06-02"
+   },
+   {
+      "Ausgaben": 10000,
+      "Kategorie": "Ausbildung",
+      "Datum": "2022-06-10"
+   },
+   {
+      "Ausgaben": -10000,
+      "Kategorie": "Ausbildung",
+      "Datum": "2022-06-03"
+   }
+]

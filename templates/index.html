@@ -1,0 +1,41 @@
+{% extends "head.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Startseite</title>
+</head>
+<body>
+    <h2>Wieviel hast du nun schon wieder ausgegeben?</h2>
+    <form action="/" method="POST">
+        </br>
+    <h4>Ausgaben</h4>
+<form method="POST">
+    <input type="number" name="Ausgaben" placeholder="Gib mir eine Zahl an">
+    </br>
+    </br>
+    <h4>Kategorie</h4>
+    <select name="Kategorie">
+        <option value="Ausbildung">Ausbildung</option>
+        <option value="Shopping">Shopping</option>
+        <option value="Ausgehen">Ausgehen</option>
+        <option value="Mobilität">Mobilität</option>
+        <option value="Wohnen">Wohnen</option>
+        <option value="Kleinkram">KLeinkram</option>
+        <option value="Unkategorisiert">Unkategorisiert</option>
+    </select>
+</br>
+    </br>
+    <h4>Datum</h4>
+    <input type="date" name="Datum" value="<?php echo date('Y-m-d'); ?>">
+    <button type="submit">Senden</button>
+    {{eingabe}}
+
+</form>
+</body>
+{% endblock %}
+</html>
+

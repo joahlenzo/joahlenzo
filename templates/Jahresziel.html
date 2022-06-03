@@ -1,0 +1,41 @@
+{% extends "head.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jahresziel</title>
+</head>
+<body>
+<h1>Lass uns sehen, wie es um dein Jahresziel steht</h1>
+
+    </br>
+    </br>
+<h3> Du möchtest nicht mehr als {{ jahresziel_ungerechnet }} ausgeben</h3>
+<div class> <!-- m5 rückt die Tabelle einwenig ein-->
+
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <th style="width: 30%" scope="col">Noch mögliche Ausgaben</th>
+            <th style="width: 70%" scope="col">Totale Ausgaben</th>
+        </thead>
+            {% if jahresziel < 30000 and jahresziel > 20000 %}
+            <td style="color: green;">{{jahresziel}}</td>
+            {% elif jahresziel < 20000 and jahresziel > 10000 %}
+            <td style="color: orange;">{{jahresziel}}</td>
+            {% else %}
+            <td style="color: red;">{{jahresziel}}</td>
+        {% endif %}
+            <td style="color: red;">{{summiert}}</td>
+
+
+
+
+
+    </table>
+</div>
+</body>
+{% endblock %}
+</html>
