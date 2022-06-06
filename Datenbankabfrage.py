@@ -30,3 +30,13 @@ def eingabe_laden():
         datei_inhalt = []
 
     return datei_inhalt
+
+def viz():
+    kategorie, summe = Datenbankabfrage.eingabe_laden()
+    fig = px.bar(x=kategorie, y=summe)
+    fig.update_layout(
+        title="Totale Ausgaben pro Kategorien",
+        xaxis_title="Kategorie",
+        yaxis_title="Ausgaben")
+    div = plot(fig, output_type="div")
+    return div

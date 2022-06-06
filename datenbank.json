@@ -48,5 +48,40 @@
       "Ausgaben": -10000,
       "Kategorie": "Ausbildung",
       "Datum": "2022-06-03"
+   },
+   {
+      "Ausgaben": 3000,
+      "Kategorie": "Shopping",
+      "Datum": "2022-06-10"
+   },
+   {
+      "Ausgaben": -10000,
+      "Kategorie": "Ausbildung",
+      "Datum": "2022-06-07"
+   },
+   {
+      "Ausgaben": 10000,
+      "Kategorie": "Ausbildung",
+      "Datum": "2022-06-03"
+   },
+   {
+      "Ausgaben": 10000,
+      "Kategorie": "Ausbildung",
+      "Datum": "2022-06-06"
+   },
+   {
+      "Ausgaben": -20000,
+      "Kategorie": "Ausbildung",
+      "Datum": "2022-06-06"
+   },
+   {
+      "Ausgaben": 10000,
+      "Kategorie": "Ausbildung",
+      "Datum": "2022-06-06"
+   },
+   {
+      "Ausgaben": -5000,
+      "Kategorie": "Ausbildung",
+      "Datum": "2022-06-08"
    }
 ]

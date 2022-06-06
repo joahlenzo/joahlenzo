@@ -21,13 +21,13 @@
             <th style="width: 30%" scope="col">Noch mögliche Ausgaben</th>
             <th style="width: 70%" scope="col">Totale Ausgaben</th>
         </thead>
-            {% if jahresziel < 30000 and jahresziel > 20000 %}
+            {% if jahresziel > 2/3 * jahresziel_ungerechnet %}
             <td style="color: green;">{{jahresziel}}</td>
-            {% elif jahresziel < 20000 and jahresziel > 10000 %}
+            {% elif jahresziel < 2/3 * jahresziel_ungerechnet and jahresziel > 1/3 * jahresziel_ungerechnet %}
             <td style="color: orange;">{{jahresziel}}</td>
             {% else %}
             <td style="color: red;">{{jahresziel}}</td>
-        {% endif %}
+            {% endif %}
             <td style="color: red;">{{summiert}}</td>
 
 

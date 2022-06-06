@@ -4,6 +4,7 @@ from flask import request
 import Datenbankabfrage
 
 
+
 app = Flask(__name__)
 
 
@@ -44,8 +45,8 @@ def ausgaben():
             if liste_elemente['Kategorie'] == kategorie_filter and liste_elemente['Datum'].split('-')[1] == monat_filterung:
                 gefilterte_elemente.append(liste_elemente)
                 summe += liste_elemente["Ausgaben"]
-            Aussagesatz = "Du gibst im " + monat_filterung + "-ten Monat " + str(summe) + " SFR nur für die Kategorie " + kategorie_filter + " aus!"
-        return render_template("Ausgaben.html", liste_elemente=gefilterte_elemente, summe=summe, aussagesatz=Aussagesatz)
+            Aussagesatz = "Du hast im " + monat_filterung + "-ten Monat " + str(summe) + " SFR nur für die Kategorie " + kategorie_filter + " ausgegeben!"
+        return render_template("Ausgaben.html", liste_elemente=gefilterte_elemente, summe=summe, Kategorie=kategorie_filter, aussagesatz=Aussagesatz)
     return render_template("Ausgaben.html")
 
 
@@ -66,14 +67,11 @@ def finanzen():
 def jahresziel():
     Jahresziel = 30000
     summe_ausgaben = 0
-    daten_zählen = Datenbankabfrage.eingabe_laden()
-    for elemente in daten_zählen:
+    daten_zusammenzählen = Datenbankabfrage.eingabe_laden()
+    for elemente in daten_zusammenzählen:
         summe_ausgaben += elemente["Ausgaben"]
         goal_jahresziel = Jahresziel - summe_ausgaben
     return render_template("Jahresziel.html", summiert=summe_ausgaben, jahresziel=goal_jahresziel, jahresziel_ungerechnet=Jahresziel)
-
-
-
 
 
 if __name__ == "__main__":
