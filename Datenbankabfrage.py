@@ -40,3 +40,13 @@ def viz():
         yaxis_title="Ausgaben")
     div = plot(fig, output_type="div")
     return div
+
+def stats():
+    list_x = []
+    list_y = []
+    daten=eingabe_laden()
+    for element in daten:
+        list_x.append(element["modul-name"])
+        list_y.append(int(element["credits"]))
+    return list_x, list_y
+

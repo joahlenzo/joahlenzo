@@ -53,14 +53,17 @@ def ausgaben():
 @app.route("/finanzen")
 def finanzen():
     daten_filtern = Datenbankabfrage.eingabe_laden()
-    kategorien = []
-    summenliste = []
+    ausgaben_kategorie = {}
     for elemente in daten_filtern:
-        kategorien_elemente = elemente["Kategorie"]
-        kategorien.append(kategorien_elemente)
-        summen = elemente["Ausgaben"]
-        summenliste.append(summen)
-    return render_template("Finanzen.html", kategorien=kategorien, summenliste=summenliste)
+        if elemente["Kategorie"] in ausgaben_kategorie:
+            ausgaben_kategorie[elemente["Kategorie"]] += elemente["Ausgaben"]
+        else:
+            ausgaben_kategorie[elemente["Kategorie"]] = elemente["Ausgaben"]
+
+    kategorien = list(ausgaben_kategorie.keys())
+    summierte_ausgaben = list(ausgaben_kategorie.values())
+
+    return render_template("Finanzen.html", summen=ausgaben_kategorie, x=kategorien, y=summierte_ausgaben)
 
 
 @app.route("/jahresziel")
@@ -72,6 +75,9 @@ def jahresziel():
         summe_ausgaben += elemente["Ausgaben"]
         goal_jahresziel = Jahresziel - summe_ausgaben
     return render_template("Jahresziel.html", summiert=summe_ausgaben, jahresziel=goal_jahresziel, jahresziel_ungerechnet=Jahresziel)
+
+
+
 
 
 if __name__ == "__main__":
