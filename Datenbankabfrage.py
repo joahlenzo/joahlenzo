@@ -31,22 +31,7 @@ def eingabe_laden():
 
     return datei_inhalt
 
-def viz():
-    kategorie, summe = Datenbankabfrage.eingabe_laden()
-    fig = px.bar(x=kategorie, y=summe)
-    fig.update_layout(
-        title="Totale Ausgaben pro Kategorien",
-        xaxis_title="Kategorie",
-        yaxis_title="Ausgaben")
-    div = plot(fig, output_type="div")
-    return div
 
-def stats():
-    list_x = []
-    list_y = []
-    daten=eingabe_laden()
-    for element in daten:
-        list_x.append(element["modul-name"])
-        list_y.append(int(element["credits"]))
-    return list_x, list_y
+
+
 

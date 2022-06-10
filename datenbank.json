@@ -83,5 +83,35 @@
       "Ausgaben": -5000,
       "Kategorie": "Ausbildung",
       "Datum": "2022-06-08"
+   },
+   {
+      "Ausgaben": 3000,
+      "Kategorie": "Unkategorisiert",
+      "Datum": "2022-06-24"
+   },
+   {
+      "Ausgaben": -300,
+      "Kategorie": "Wohnen",
+      "Datum": "2022-06-23"
+   },
+   {
+      "Ausgaben": 3024,
+      "Kategorie": "Wohnen",
+      "Datum": "2022-06-16"
+   },
+   {
+      "Ausgaben": 876,
+      "Kategorie": "Ausbildung",
+      "Datum": "2022-06-16"
+   },
+   {
+      "Ausgaben": 200,
+      "Kategorie": "Ausbildung",
+      "Datum": "2022-06-11"
+   },
+   {
+      "Ausgaben": 200,
+      "Kategorie": "Ausgehen",
+      "Datum": "2022-06-02"
    }
 ]
