@@ -9,7 +9,6 @@ def speichern(input_ausgaben, input_kategorie, input_datum):
             datei_inhalt = json.load(open_file)
     except FileNotFoundError:
         datei_inhalt = []
-        print("Sorry, finde nix mit diese")
 
     inhalt = {"Ausgaben": input_ausgaben,
               "Kategorie": input_kategorie,

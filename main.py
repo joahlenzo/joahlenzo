@@ -4,7 +4,7 @@ from flask import request
 from Datenbankabfrage import eingabe_laden, speichern
 import plotly.express as px
 from plotly.offline import plot
-import plotly.graph_objects as go
+
 
 
 
@@ -18,20 +18,34 @@ def index():
 
     # get = Inhalt von eingabe.html dem Client anzeigen
     if request.method.lower() == "get":
-        names = ['Bob', 'Cindy', 'Noah']
-        names.pop()
-        return render_template('index.html',test=names)
+        return render_template('index.html')
     # post = ausgefüllte Daten vom Formular von Client via url /eingabe erhalten
     if request.method.lower() == "post":
-        input_ausgaben = int(request.form['Ausgaben'])
-        input_kategorie = request.form["Kategorie"]
-        input_datum = request.form["Datum"]
-    #Speicherung Daten in JSON
-        speichern(input_ausgaben, input_kategorie, input_datum)
-    #Antwortsatz
-        eingabe_gespeichert = "Dein Eintrag wurde erfolgreich gespeichert"
-        return render_template("index.html", eingabe=eingabe_gespeichert) #Nach Sendebutton anzeigen
+        if request.form.get("action1") == "VALUE1":
+            input_ausgaben = int(request.form['Ausgaben'])
+            input_kategorie = request.form["Kategorie"]
+            input_datum = request.form["Datum"]
+        #Speicherung Daten in JSON
+            speichern(input_ausgaben, input_kategorie, input_datum)
+        #Antwortsatz
+            eingabe_gespeichert = "Dein Eintrag wurde erfolgreich gespeichert"
+            return render_template("index.html", eingabe=eingabe_gespeichert)  # Nach Sendebutton anzeigen
+        elif request.form.get("action2") == "VALUE2":
+            eingaben_loeschen = eingabe_laden()
+            test = eingaben_loeschen.pop()
+            gelöscht = eingaben_loeschen
+
+
+
+            eingabe_gelöscht = "Dein Eintrag wurde erfolgreich gelöscht"
+            return render_template("index.html", eingabe=eingaben_loeschen, test=test, neu=gelöscht)  # Nach Sendebutton anzeigen
+
+
+
     return render_template("index.html")
+
+
+
 
 
 @app.route("/ausgaben", methods=["GET", "POST"])
@@ -55,6 +69,8 @@ def ausgaben():
             Aussagesatz = "Du hast im " + monat_filterung + "-ten Monat " + str(summe) + " SFR nur für die Kategorie " + kategorie_filter + " ausgegeben!"
         return render_template("Ausgaben.html", liste_elemente=gefilterte_elemente, summe=summe, Kategorie=kategorie_filter, Aussagesatz=Aussagesatz)
     return render_template("Ausgaben.html")
+
+
 
 
 @app.route("/finanzen")

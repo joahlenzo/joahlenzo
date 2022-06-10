@@ -113,5 +113,10 @@
       "Ausgaben": 200,
       "Kategorie": "Ausgehen",
       "Datum": "2022-06-02"
+   },
+   {
+      "Ausgaben": 3000,
+      "Kategorie": "Mobilit\u00e4t",
+      "Datum": "2022-06-02"
    }
 ]
