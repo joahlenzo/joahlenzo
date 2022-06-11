@@ -13,7 +13,7 @@ def speichern(input_ausgaben, input_kategorie, input_datum):
     inhalt = {"Ausgaben": input_ausgaben,
               "Kategorie": input_kategorie,
               "Datum": input_datum}
-    datei_inhalt.append(inhalt)
+    datei_inhalt = datei_inhalt.append(inhalt)
 
     with open(datei, "w") as open_file:
         json.dump(datei_inhalt, open_file, indent=3)

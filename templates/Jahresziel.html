@@ -9,33 +9,40 @@
     <title>Jahresziel</title>
 </head>
 <body>
-<h1>Lass uns sehen, wie es um dein Jahresziel steht</h1>
-
+    <h1>Lass uns sehen, wie es um dein Jahresziel steht</h1>
     </br>
     </br>
-<h3> Du möchtest nicht mehr als {{ jahresziel_ungerechnet }} ausgeben</h3>
-<div class> <!-- m5 rückt die Tabelle einwenig ein-->
-
-    <table class="table table-striped">
-        <thead class="thead-dark">
-            <th style="width: 30%" scope="col">Noch mögliche Ausgaben</th>
-            <th style="width: 70%" scope="col">Totale Ausgaben</th>
-        </thead>
-            {% if jahresziel > 2/3 * jahresziel_ungerechnet %}
-            <td style="color: green;">{{jahresziel}}</td>
-            {% elif jahresziel < 2/3 * jahresziel_ungerechnet and jahresziel > 1/3 * jahresziel_ungerechnet %}
-            <td style="color: orange;">{{jahresziel}}</td>
-            {% else %}
-            <td style="color: red;">{{jahresziel}}</td>
-            {% endif %}
-            <td style="color: red;">{{summiert}}</td>
 
 
+    <h4>Aktuell beträgt dein Ziel</h4> <h1 style="color: blue">{{jahresziel_ungerechnet}}</h1>
+    </br>
+    </br>
 
 
+    <h6> Wieviel setzt du dir als Jahresziel?</h6>
+        <form method="POST">
+        <input type="number" name="Ziel" placeholder="Gib mir eine Zahl an">
+        <button type="submit">Senden</button>
+        </form>
+    </br>
 
-    </table>
-</div>
+
+    <div class>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <th style="width: 30%" scope="col">Noch mögliche Ausgaben</th>
+                <th style="width: 70%" scope="col">Totale Ausgaben</th>
+            </thead>
+                {% if jahresziel > 2/3 * jahresziel_ungerechnet %}
+                <td style="color: green;">{{jahresziel}}</td>
+                {% elif jahresziel < 2/3 * jahresziel_ungerechnet and jahresziel > 1/3 * jahresziel_ungerechnet %}
+                <td style="color: orange;">{{jahresziel}}</td>
+                {% else %}
+                <td style="color: red;">{{jahresziel}}</td>
+                {% endif %}
+                <td style="color: red;">{{summiert}}</td>
+        </table>
+    </div>
 {{visualisierung|safe}}
 </body>
 {% endblock %}

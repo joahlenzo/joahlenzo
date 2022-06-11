@@ -1,0 +1,30 @@
+{% extends "head.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jahresziel</title>
+</head>
+<body>
+<h1>Glückwunsch! Du hast dein Jahresziel geändert!</h1>
+</br>
+</br>
+<h4>Navigiere zurück, um zu sehen, was sich verändert hat!</h4>
+<a class="nav-link" href="{{ url_for('jahresziel') }}">Hier gehts zurück</a>
+
+    </br>
+    </br>
+
+</br>
+    </br>
+
+
+
+</div>
+{{visualisierung|safe}}
+</body>
+{% endblock %}
+</html>
