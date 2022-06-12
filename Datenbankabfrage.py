@@ -13,7 +13,7 @@ def speichern(input_ausgaben, input_kategorie, input_datum):
     inhalt = {"Ausgaben": input_ausgaben,
               "Kategorie": input_kategorie,
               "Datum": input_datum}
-    datei_inhalt = datei_inhalt.append(inhalt)
+    datei_inhalt.append(inhalt)
 
     with open(datei, "w") as open_file:
         json.dump(datei_inhalt, open_file, indent=3)
@@ -29,6 +29,17 @@ def eingabe_laden():
         datei_inhalt = []
 
     return datei_inhalt
+
+def loeschen(geloescht):
+    datei = "datenbank.json"
+    try:
+        with open(datei) as open_file:
+            datei_inhalt = json.load(open_file)
+    except FileNotFoundError:
+        datei_inhalt = []
+
+    with open(datei, "w") as open_file:
+        json.dump(geloescht, open_file, indent=3)
 
 
 

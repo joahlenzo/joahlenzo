@@ -1,53 +1,79 @@
 {% extends "head.html" %}
-
 {% block content %}
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Startseite</title>
-</head>
-<body>
-    <h2>Wieviel hast du nun schon wieder ausgegeben?</h2>
-    <form action="/" method="POST">
-        </br>
-    <h4>Ausgaben</h4>
-<form method="POST">
-    <input type="number" name="Ausgaben" placeholder="Gib mir eine Zahl an">
-    </br>
-    </br>
-    <h4>Kategorie</h4>
-    <select name="Kategorie">
-        <option value="Ausbildung">Ausbildung</option>
-        <option value="Shopping">Shopping</option>
-        <option value="Ausgehen">Ausgehen</option>
-        <option value="Mobilität">Mobilität</option>
-        <option value="Wohnen">Wohnen</option>
-        <option value="Kleinkram">KLeinkram</option>
-        <option value="Unkategorisiert">Unkategorisiert</option>
-    </select>
-</br>
-    </br>
-    <h4>Datum</h4>
-    <input type="date" name="Datum" value="<?php echo date('Y-m-d'); ?>">
-    <button type="submit" value="VALUE1" name="action1">Senden</button>
+    <head>
+        <meta charset="UTF-8">
+        <title>Startseite</title>
+    </head>
+    <body>
+        <h2>Wieviel hast du nun schon wieder ausgegeben?</h2>
+        <!-- Falls Daten nicht komplett, kommt eine Hinweisbox-->
+        {% if error %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{error}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+        <!-- Formular für Dateneingabe nach Kategorie, Ausgaben und Datum-->
+        <form action="/" method="POST">
+            </br>
+            <h4>Ausgaben</h4>
+            <input type="number" name="Ausgaben" value="{{ausgaben}}" placeholder="Gib mir eine Zahl an"> <!-- Value wird für Hinweisbox benötigt-->
+            </br>
+            </br>
+            <h4>Kategorie</h4> <!-- Eingabemöglichkeiten verschiedener Kategorien-->
+            <select name="Kategorie" value="{{kategorie}}">
+                <option value="Ausbildung">Ausbildung</option>
+                <option value="Shopping">Shopping</option>
+                <option value="Ausgehen">Ausgehen</option>
+                <option value="Mobilität">Mobilität</option>
+                <option value="Wohnen">Wohnen</option>
+                <option value="Kleinkram">KLeinkram</option>
+                <option value="Unkategorisiert">Unkategorisiert</option>
+            </select></br></br>
 
-    </br>
-    </br>
-    </br>
-    </br>
-    <h3>Stimmt dein letzter Eintrag nicht? Dann lösch ihn einfach!</h3>
-    <button type="submit" value="VALUE2" name="action2"/>Löschen</button>
-    {{eingabe}}
-</form>
+            <h4>Datum</h4> <!-- Eingabe Datum -->
+            <input type="date" name="Datum" value="{{datum}}">
+            <!-- Übermittlung durch Sendebutton -->
+            <button type="submit" value="VALUE1" name="action1">Senden</button>
+            {{speichersatz}}
+        </form>
+
         </br>
-    </br>
-        {{test}}
-                </br>
-    </br>
-        {{neu}}
-</body>
-{% endblock %}
+        </br>
+        </br>
+        </br>
+        <!-- Löschungsmöglichkeit des letzten Eintrags-->
+        <form action="/" method="POST">
+            <h3>Stimmt dein letzter Eintrag nicht? Dann lösch ihn einfach!</h3>
+            <button type="submit" value="VALUE2" name="action2"/>Löschen</button>
+            {{löschungssatz}}
+        </form>
+        </br>
+        <!-- Hinweisbox mit Bootstrap CSS-->
+        <div class>
+            <h5>Wenn du etwas löschst, zeigt es dir hier an, was du gelöscht hast</h5>
+            {% for key, values in loeschung.items() %}
+
+            <table class="table table-striped">
+            <thead class="thead-dark">
+                <th style="width: 40%" scope="col">{{key}}</th>
+            </thead>
+            <td style="color: black;">{{values}}</td>
+            {% endfor %}
+            </table>
+
+        </div>
+        <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Löschen hilft nichts?</h4>
+        <p>Wenn du nun doch mal zuviele Ausgaben eingegeben hast, kannst du sie einfach mit den Minus-Betrag eingeben. Dann rechnet es dir diesen Betrag wieder ab.</p>
+        <hr>
+        <p class="mb-0">Bsp.: Du hast 50.00 SFr. zu viel eingegeben. Also gibst du nun bei Ausgaben den Betrag -50 ein. Und schon erledigt</p>
+        </div>
+
+
+    </body>
+        {% endblock %}
 </html>
 
