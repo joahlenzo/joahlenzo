@@ -20,7 +20,7 @@ os.path (File Exists check)
 
 <h2>4. Workflow</h2>
 
-!Hier kommt das Flowchart
+![](templates/Flowchart_FINAZUBI.png)
 
 <h2>5. Architektur</h2>
 Die Architektur ist unterteilt in Startseite, Ausgaben, Finanzen & Startseite
