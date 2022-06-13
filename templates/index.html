@@ -51,7 +51,14 @@
             {{löschungssatz}}
         </form>
         </br>
-        <!-- Hinweisbox mit Bootstrap CSS-->
+        <!-- Hinweisbox wenn keine Datenvorhanden zum löschen-->
+        {% if antworten %}
+        <div class="alert alert-info" role="alert">
+            {{antworten}}
+        </div>
+        {% endif %}
+        {% if loeschung %}
+        <!-- Gelöschte Daten sauber anzeigen, wenn Daten gelöscht werden -->
         <div class>
             <h5>Wenn du etwas löschst, zeigt es dir hier an, was du gelöscht hast</h5>
             {% for key, values in loeschung.items() %}
@@ -63,16 +70,15 @@
             <td style="color: black;">{{values}}</td>
             {% endfor %}
             </table>
-
         </div>
+        {% endif %}
+        <!-- Hinweisbox mit Bootstrap CSS-->
         <div class="alert alert-success" role="alert">
-        <h4 class="alert-heading">Löschen hilft nichts?</h4>
-        <p>Wenn du nun doch mal zuviele Ausgaben eingegeben hast, kannst du sie einfach mit den Minus-Betrag eingeben. Dann rechnet es dir diesen Betrag wieder ab.</p>
-        <hr>
-        <p class="mb-0">Bsp.: Du hast 50.00 SFr. zu viel eingegeben. Also gibst du nun bei Ausgaben den Betrag -50 ein. Und schon erledigt</p>
+            <h4 class="alert-heading">Löschen hilft nichts?</h4>
+            <p>Wenn du nun doch mal zuviele Ausgaben eingegeben hast, kannst du sie einfach mit den Minus-Betrag eingeben. Dann rechnet es dir diesen Betrag wieder ab.</p>
+            <hr>
+            <p class="mb-0">Bsp.: Du hast 50.00 SFr. zu viel eingegeben. Also gibst du nun bei Ausgaben den Betrag -50 ein. Und schon erledigt</p>
         </div>
-
-
     </body>
         {% endblock %}
 </html>

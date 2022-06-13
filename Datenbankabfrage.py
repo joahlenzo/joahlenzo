@@ -1,7 +1,7 @@
 import json
 
 
-#json-file wird geschrieben mit w = write
+#   json-file wird geöffnet
 def speichern(input_ausgaben, input_kategorie, input_datum):
     datei = "datenbank.json"
     try:
@@ -9,12 +9,12 @@ def speichern(input_ausgaben, input_kategorie, input_datum):
             datei_inhalt = json.load(open_file)
     except FileNotFoundError:
         datei_inhalt = []
-
+    #   Dict für Datenbank (Variablen werden von Formular ausfüllen (def index) geholt)
     inhalt = {"Ausgaben": input_ausgaben,
               "Kategorie": input_kategorie,
               "Datum": input_datum}
     datei_inhalt.append(inhalt)
-
+    #   json-file wird geschrieben mit w = write
     with open(datei, "w") as open_file:
         json.dump(datei_inhalt, open_file, indent=3)
 
@@ -30,16 +30,14 @@ def eingabe_laden():
 
     return datei_inhalt
 
+#   Funktion holt Daten durch Formular mit Delete Button und überschreibt Datenbankabfrage
 def loeschen(geloescht):
     datei = "datenbank.json"
-    try:
-        with open(datei) as open_file:
-            datei_inhalt = json.load(open_file)
-    except FileNotFoundError:
-        datei_inhalt = []
-
     with open(datei, "w") as open_file:
         json.dump(geloescht, open_file, indent=3)
+
+
+
 
 
 
