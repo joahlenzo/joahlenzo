@@ -40,7 +40,7 @@
                 <option value="11">November</option>
                 <option value="12">Dezember</option>
             </select>
-            <button type="submit">Senden</button>
+            <button type="submit" value="VALUE1" name="action1">Senden</button>
         </form>
         </br>
         </br>
@@ -48,8 +48,11 @@
         1. Aussgaesatz zeigt an, wieviel die totalen Ausgaben für die gewählten Filter sind.
         2. Wenn keine Daten auf die Filterung zutreffen, gibt der Aussagesatz den Hinweis dazu
         -->
-        <h3 style="color: green;">{{Aussagesatz}}</h3>
-
+        <h3 style="color: orange;">{{Aussagesatz}}</h3>
+        {% if liste_elemente == [] or False %}
+        <h6 style="color">{{keine_ausgabe}}
+        </h6>
+        {% endif %}
         <div class>
             <!--
             1. Gefilterte Elemente werden aufgelistet und durch Rot (Ausgaben), Grün (Einnahmen) klassifiziert
@@ -71,10 +74,18 @@
                     <td style="color: green;">{{elemente["Ausgaben"]}}</td>
                     {% endif %}
                     <td style="color: black;">{{elemente["Kategorie"]}}</td>
+                    <td>
+                        <form action="/ausgaben" method="POST">
+                            <input name="UID" value={{elemente["UID"]}}>
+                            <button type="submit">Löschen</button>
+                        </form>
+                    </td>
             </table>
+
+
          {% endfor %}
         </div>
-
+{{element}}
     </body>
 {% endblock %}
 </html>

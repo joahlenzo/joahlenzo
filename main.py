@@ -1,11 +1,13 @@
 from flask import Flask
 from flask import render_template
 from flask import request
-from Datenbankabfrage import eingabe_laden, speichern, loeschen
+from Datenbankabfrage import eingabe_laden, speichern, loeschen, element_loeschen
 import plotly.express as px
 from plotly.offline import plot
 from Jahresziel import ziel_speichern, ziel_laden
 from os.path import exists
+
+
 
 app = Flask(__name__)
 
@@ -19,9 +21,8 @@ def index():
     if request.method.lower() == "post":
         if request.form.get("action1") == "VALUE1":
             input_ausgaben = request.form['Ausgaben']
-            input_kategorie = request.form["Kategorie"]
-            input_datum = request.form["Datum"]
-
+            input_kategorie = request.form['Kategorie']
+            input_datum = request.form['Datum']
             #   Fehlermeldung falls nicht alle Daten eingegeben wurden
             if not input_ausgaben or not input_kategorie or not input_datum:
                 error_statement = "Too lazy. Bitte fülle alle Felder aus"
@@ -41,8 +42,7 @@ def index():
             #   Wenn Daten vorhanden sind, werden die gelöschten Daten ans index.html übermittelt
             else:
                 element_loeschen = eingaben_loeschen.pop()
-                geloescht = eingaben_loeschen
-                loeschen(geloescht)
+                loeschen(eingaben_loeschen)
                 löschsatz = "Dein Eintrag wurde erfolgreich gelöscht"   # Nach Löschbutton anzeigen
                 return render_template("index.html", löschungssatz=löschsatz, loeschung=element_loeschen)
 
@@ -54,24 +54,37 @@ def ausgaben():
     # get = Inhalt der Finanzen.html wird angezeigt
     if request.method.lower() == "get":
         daten_anzeigen = eingabe_laden()
+        keine_ausgaben = "Deine Ausgaben sind also komplett zero --> 0"
         Hinweissatz = "Hier hast du eine Übersicht über alle getätigten Aussagen"   # Wenn keine Filterung gemacht wurde
-        return render_template("Ausgaben.html", liste_elemente=daten_anzeigen, Aussagesatz=Hinweissatz)
+        return render_template("Ausgaben.html", liste_elemente=daten_anzeigen, Aussagesatz=Hinweissatz, keine_ausgabe=keine_ausgaben)
     # post = Formulardaten erhalten
     if request.method.lower() == "post":
-        kategorie_filter = request.form['Kategorie']
-        monat_filterung = request.form['Monat']
-        # Daten filtern und zusammenzählen
-        daten_laden = eingabe_laden()
-        gefilterte_elemente = []
-        summe = 0
-        for list_element in daten_laden:
-            if list_element['Kategorie'] == kategorie_filter and list_element['Datum'].split('-')[1] == monat_filterung:    # Filterung nach Monat und Kategorie
-                gefilterte_elemente.append(list_element)
-                #   Zusammenzählen alle Ausgaben der Filterungselemente
-                summe += list_element["Ausgaben"]
-                #   Wenn keine Daten vorhanden sind, wird ein Hinweis geschaltet
-        Filterungssatz = "Du hast im " + monat_filterung + "-ten Monat " + str(summe) + " SFR nur für die Kategorie " + kategorie_filter + " ausgegeben!"
-        return render_template("Ausgaben.html", liste_elemente=gefilterte_elemente, summe=summe,Kategorie=kategorie_filter, Aussagesatz=Filterungssatz)
+        if request.form.get("action1") == "VALUE1":
+            kategorie_filter = request.form['Kategorie']
+            monat_filterung = request.form['Monat']
+            # Daten filtern und zusammenzählen
+            daten_laden = eingabe_laden()
+            gefilterte_elemente = []
+            summe = 0
+            for list_element in daten_laden:
+                if list_element['Kategorie'] == kategorie_filter and list_element['Datum'].split('-')[1] == monat_filterung:    # Filterung nach Monat und Kategorie
+                    gefilterte_elemente.append(list_element)
+                    #   Zusammenzählen alle Ausgaben der Filterungselemente
+                    summe += list_element["Ausgaben"]
+                    #   Wenn keine Daten vorhanden sind, wird ein Hinweis geschaltet
+            Filterungssatz = "Du hast im " + monat_filterung + "-ten Monat " + str(summe) + " SFR nur für die Kategorie " + kategorie_filter + " ausgegeben!"
+            return render_template("Ausgaben.html", liste_elemente=gefilterte_elemente, summe=summe,Kategorie=kategorie_filter, Aussagesatz=Filterungssatz)
+        else:
+            counter = 0
+            daten_löschen = eingabe_laden()
+            match = request.form['UID']
+            for geloescht in daten_löschen:
+                if geloescht["UID"] == match:
+                    del daten_löschen[counter]
+                    loeschen(daten_loeschen)
+                counter = counter + 1
+
+                return render_template("Ausgaben.html", liste_elemente=daten_löschen, element=daten_löschen[counter])
     return render_template("Ausgaben.html", Aussagesatz=keine_daten)
 
 
@@ -101,6 +114,7 @@ def finanzen():
             yaxis_title="Ausgaben")
         div = plot(fig, output_type="div")
         return render_template("Finanzen.html", visualisierung=div)
+
 
 #   Zeigt das Jahresziel an
 @app.route("/jahresziel",  methods=["GET", "POST"])
