@@ -24,8 +24,8 @@ def index():
             input_kategorie = request.form['Kategorie']
             input_datum = request.form['Datum']
             #   Fehlermeldung falls nicht alle Daten eingegeben wurden
-            if not input_ausgaben or not input_kategorie or not input_datum:
-                error_statement = "Too lazy. Bitte fülle alle Felder aus"
+            if not input_ausgaben or not input_kategorie or not input_datum or int(input_ausgaben) == 0:
+                error_statement = "Too lazy. Bitte fülle alle Felder aus. Ausgaben dürfen nicht 0 sein!"
                 return render_template("index.html",error=error_statement, ausgaben=input_ausgaben, kategorie=input_kategorie, datum=input_datum)
 
             # Speicherung Daten in JSON
