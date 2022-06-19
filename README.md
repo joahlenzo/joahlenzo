@@ -64,6 +64,7 @@ Dateneingabe: Ausgaben hinzufügen / Kategorie hinzufügen / Datum hinzufügen
 Datenspeicherung: Ausgaben aus Dateneingabe werden in einer JSON-Datei gespeichert.
 Datenverarbeitung: Die Daten werden zusammengerechnet und gefiltert in Ausgaben.html, Kategorie und Jahresziel (Mit Jinja und Python)
 Datenlöschung: Das letzte Element kann mittels eines Formularbuttons gelöscht werden
+Datenlöschung: Spezifische Elemente können mittels Formularbutton gelöscht werden
 Datenausgabe: Nach Filterwunsch werden Daten ausgegeben
     Ausgabe nach Monat und Kategorie (Ausgabe)
     Ausgabe nach Genre (Finanzen)
