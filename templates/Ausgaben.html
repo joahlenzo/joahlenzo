@@ -64,19 +64,20 @@
                     <th style="width: 40%" scope="col">Datum</th>
                     <th style="width: 40%" scope="col">Ausgaben</th>
                     <th style="width: 20%" scope="col">Kategorie</th>
+                    <th style="width: 20%" scope="col">Löschen</th>
                 </thead>
 
-                    <td style="color: black;">{{elemente["Datum"]}}</td>
+                    <td style="color: black;">{{ elemente["Datum"] }}</td>
                     {% if elemente["Ausgaben"]|int > 0 %}
-                    <td style="color: red;">{{elemente["Ausgaben"]}}</td>
+                    <td style="color: red;">{{ elemente["Ausgaben"] }}</td>
                     {% endif %}
                     {% if elemente["Ausgaben"]|int < 0 %}
-                    <td style="color: green;">{{elemente["Ausgaben"]}}</td>
+                    <td style="color: green;">{{ elemente["Ausgaben"] }}</td>
                     {% endif %}
-                    <td style="color: black;">{{elemente["Kategorie"]}}</td>
+                    <td style="color: black;">{{ elemente["Kategorie"] }}</td>
                     <td>
                         <form action="/ausgaben" method="POST">
-                            <input name="UID" value={{elemente["UID"]}}>
+                            <input type="hidden" name="UID" value={{ elemente["UID"] }}>
                             <button type="submit">Löschen</button>
                         </form>
                     </td>
@@ -85,7 +86,10 @@
 
          {% endfor %}
         </div>
-{{element}}
+
+
+        </br>
+
     </body>
 {% endblock %}
 </html>

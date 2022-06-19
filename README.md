@@ -29,7 +29,7 @@ Die Architektur ist unterteilt in Startseite, Ausgaben, Finanzen & Jahresziel
 Wenn noch keine Daten eingegeben wurden, funktioniert das Programm trotzdem 
 und zeigt auf verschiedenste Art und Weise an, dass Daten fehlen.
 
-<h3>5.1 Gefilterte Ausgaben ansehen / Ausgaben </h3>
+<h3>5.1 Gefilterte Ausgaben ansehen / Index </h3>
 Der User erhält auf der Startseite als Einstiegspunkt die Möglichkeit, seine Ausgaben einzugeben.
 Dabei MUSS er Ausgabensumme, Kategorie und das Datum der Ausgabe auswählen.
 Wenn die letzte Ausgabe gelöscht werden will, hat es einen Löschbutton dazu.
@@ -41,7 +41,7 @@ Der User wählt eine Kategorie aus. Als zweite Filteroption wählt er den Monat.
 Es zeigt eine geordnete Tabelle an, wo alle Ausgaben aufgezeigt werden (gefilterte Variante).
 Falls Einnahmen eingerechnet werden sollten (Zuviel Bezahlung von Rechnungen, Twintgutschriften, falsch getätigte Ausgaben), 
 zeigt es diese in grüner Schrift an. Ausgaben sind mit roter Schrift gekennzeichnet.
-Zudem werden alle getätigten Ausgaben aufgelistet.
+Zudem werden alle getätigten Ausgaben aufgelistet und können von da aus gelöscht werden.
 
 
 <h3>5.3 Komplette Ausgaben ansehen / Finanzen </h3>

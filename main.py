@@ -35,12 +35,12 @@ def index():
             return render_template("index.html", speichersatz=eingabe_gespeichert)
         elif request.form.get("action2") == "VALUE2":
             eingaben_loeschen = eingabe_laden()
-            #   Wenn keine Daten vorhanden sind, wird ein Hinweis geschaltet (falls gelöscht-Button gedrückt wird)
+            #   Wenn keine Daten vorhanden sind, wird ein Hinweis geschaltet (Wenn gelöscht-Button gedrückt wird)
             if not eingaben_loeschen:
                 aussagesatz = "Aktuell sind keine Elemente enthalten. Löschen läuft nicht."
                 return render_template("index.html", antworten=aussagesatz)
             #   Wenn Daten vorhanden sind, werden die gelöschten Daten ans index.html übermittelt
-            else:
+            else:   # Letztes Element kann hier gelöscht werden
                 element_loeschen = eingaben_loeschen.pop()
                 loeschen(eingaben_loeschen)
                 löschsatz = "Dein Eintrag wurde erfolgreich gelöscht"   # Nach Löschbutton anzeigen
@@ -59,7 +59,7 @@ def ausgaben():
         return render_template("Ausgaben.html", liste_elemente=daten_anzeigen, Aussagesatz=Hinweissatz, keine_ausgabe=keine_ausgaben)
     # post = Formulardaten erhalten
     if request.method.lower() == "post":
-        if request.form.get("action1") == "VALUE1":
+        if request.form.get("action1") == "VALUE1":     # Da zwei Postübermittlungen - individuelle Übermittlung
             kategorie_filter = request.form['Kategorie']
             monat_filterung = request.form['Monat']
             # Daten filtern und zusammenzählen
@@ -73,18 +73,17 @@ def ausgaben():
                     summe += list_element["Ausgaben"]
                     #   Wenn keine Daten vorhanden sind, wird ein Hinweis geschaltet
             Filterungssatz = "Du hast im " + monat_filterung + "-ten Monat " + str(summe) + " SFR nur für die Kategorie " + kategorie_filter + " ausgegeben!"
-            return render_template("Ausgaben.html", liste_elemente=gefilterte_elemente, summe=summe,Kategorie=kategorie_filter, Aussagesatz=Filterungssatz)
-        else:
-            counter = 0
+            return render_template("Ausgaben.html", liste_elemente=gefilterte_elemente, summe=summe, Kategorie=kategorie_filter, Aussagesatz=Filterungssatz)
+        else:   # Falls die zweite Übermittlung (Löschen Button in Tabelle)
             daten_löschen = eingabe_laden()
             match = request.form['UID']
+            counter = -1    # counter zählt alle Elemente bis zum Match
             for geloescht in daten_löschen:
-                if geloescht["UID"] == match:
-                    del daten_löschen[counter]
-                    loeschen(daten_loeschen)
                 counter = counter + 1
-
-                return render_template("Ausgaben.html", liste_elemente=daten_löschen, element=daten_löschen[counter])
+                if geloescht["UID"] == match:
+                    del daten_löschen[counter]  # Entsprechendes Element wird gelöscht
+                    loeschen(daten_löschen) # Angepasstes JSON File wird übermittelt (und dann überschrieben)
+                    return render_template("Ausgaben.html", liste_elemente=daten_löschen)
     return render_template("Ausgaben.html", Aussagesatz=keine_daten)
 
 

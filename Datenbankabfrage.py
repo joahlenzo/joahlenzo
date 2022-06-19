@@ -8,6 +8,7 @@ import os
 def speichern(input_ausgaben, input_kategorie, input_datum):
     datei = "datenbank.json"
     heute = str(datetime.utcnow())
+    heute = heute.replace(" ", "")
     try:
         with open(datei) as open_file:
             datei_inhalt = json.load(open_file)
