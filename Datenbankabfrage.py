@@ -45,26 +45,15 @@ def eingabe_laden():
 
     return datei_inhalt
 
+
 #   Funktion holt Daten durch Formular mit Delete Button und überschreibt Datenbankabfrage
 def loeschen(geloescht):
     datei = "datenbank.json"
     with open(datei, "w") as open_file:
         json.dump(geloescht, open_file, indent=4)
 
-def element_loeschen(element_loeschen):
-    datei_name = "datenbank.json"
-    with open(datei_name, "r") as open_file:
-        datei_loeschen = eingabe_laden(open_file)
-        counter = 0
-        for alle_elemente in datei_loeschen:
-            if alle_elemente == element_loeschen:
-                del datei_loeschen[counter]
-            counter = counter + 1
-    if len(datei_name) == 0:
-        os.remove(datei_name)
-    else:
-        with open(datei_name, mode="w") as open_file:
-            json.dump(datei_loeschen, open_file, indent=4)
+
+
 
 
 

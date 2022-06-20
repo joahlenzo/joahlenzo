@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import render_template
 from flask import request
-from Datenbankabfrage import eingabe_laden, speichern, loeschen, element_loeschen
+from Datenbankabfrage import eingabe_laden, speichern, loeschen
 import plotly.express as px
 from plotly.offline import plot
 from Jahresziel import ziel_speichern, ziel_laden
