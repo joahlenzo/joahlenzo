@@ -40,17 +40,15 @@ def index():
                 aussagesatz = "Aktuell sind keine Elemente enthalten. Löschen läuft nicht."
                 return render_template("index.html", antworten=aussagesatz)
             #   Wenn Daten vorhanden sind, werden die gelöschten Daten ans index.html übermittelt
-            else:   # Letztes Element kann hier gelöscht werden
-                element_loeschen = eingaben_loeschen.pop()
-                loeschen(eingaben_loeschen)
-                löschsatz = "Dein Eintrag wurde erfolgreich gelöscht"   # Nach Löschbutton anzeigen
-                return render_template("index.html", löschungssatz=löschsatz, loeschung=element_loeschen)
+
+            element_loeschen = eingaben_loeschen.pop()
+            loeschen(eingaben_loeschen)
+            löschsatz = "Dein Eintrag wurde erfolgreich gelöscht"   # Nach Löschbutton anzeigen
+            return render_template("index.html", löschungssatz=löschsatz, loeschung=element_loeschen)
 
 
 @app.route("/ausgaben", methods=["GET", "POST"])
 def ausgaben():
-    #   Aussagesatz kommt, wenn keine Daten der Filterung entsprechen
-    keine_daten = "In diesem Monat und diesem Genre hast du kein Geld ausgegeben. Gratuliere!"
     # get = Inhalt der Finanzen.html wird angezeigt
     if request.method.lower() == "get":
         daten_anzeigen = eingabe_laden()
@@ -84,7 +82,6 @@ def ausgaben():
                     del daten_löschen[counter]  # Entsprechendes Element wird gelöscht
                     loeschen(daten_löschen) # Angepasstes JSON File wird übermittelt (und dann überschrieben)
                     return render_template("Ausgaben.html", liste_elemente=daten_löschen)
-    return render_template("Ausgaben.html", Aussagesatz=keine_daten)
 
 
 @app.route("/finanzen")
@@ -131,8 +128,8 @@ def jahresziel():
             #   Datenaufbereitung für Plotly
             jahresziel_anzeigen = ziel_laden()  # Holt Jahresziel Dict
             Jahresziel = jahresziel_anzeigen["Jahresziel"]
-            goal_jahresziel = Jahresziel - summe_ausgaben
-            summenliste.append(goal_jahresziel)
+            noch_moegliche_ausgaben = Jahresziel - summe_ausgaben
+            summenliste.append(noch_moegliche_ausgaben)
             summenliste.append(summe_ausgaben)
             #   Datenvisualisierung mit Plotly
             fig = px.pie(values=summenliste, names=namenliste, title="Jahresziel",
@@ -140,7 +137,7 @@ def jahresziel():
             fig.update_traces(textposition="inside", textinfo="value")
             div = plot(fig, output_type="div")
 
-            return render_template("Jahresziel.html", summiert=summe_ausgaben, jahresziel=goal_jahresziel,
+            return render_template("Jahresziel.html", summiert=summe_ausgaben, jahresziel=noch_moegliche_ausgaben,
                                    jahresziel_ungerechnet=Jahresziel, visualisierung=div)
         #   post = ausgefüllte Daten vom Formular von Client via url /eingabe erhalten
         if request.method.lower() == "post":

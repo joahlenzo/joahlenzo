@@ -23,14 +23,7 @@ def speichern(input_ausgaben, input_kategorie, input_datum):
     datei_inhalt.append(inhalt)
     #   json-file wird geschrieben mit w = write
     with open(datei, "w") as open_file:
-        json.dump(datei_inhalt, open_file, indent=4, cls=DateTimeEncoder)
-
-
-class DateTimeEncoder(JSONEncoder):
-    # Override the default method
-    def default(self, obj):
-        if isinstance(obj, (datetime.date, datetime.datetime)):
-            return obj.isoformat()
+        json.dump(datei_inhalt, open_file, indent=4)
 
 
 #funktion um json file zu laden
